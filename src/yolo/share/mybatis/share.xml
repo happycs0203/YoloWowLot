@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="share">
+
+<!-- shareBookLot 신청등록 sql -->
+<insert id="shareBookLot" parameterType="yolo.share.dto.BookShareVO"> <!-- insert,delete,update는 리턴타입 필요없음 -->
+	INSERT INTO booksharelot2
+	(bsl_num, sl_num, u_id, bsl_date, bsl_time, bsl_people, bsl_confirm)
+	VALUES
+	(BOOKSHARELOT_NO_SEQ.nextval, #{sl_num}, #{u_id}, #{bsl_date}, #{bsl_time}, '1', 'N')
+</insert>
+
+<!-- shareEdit 등록된 글 조회 -->
+<select id="shareEdit" parameterType = "sharevo" resultType="yolo.share.dto.ShareMainListVO">
+Select s.sl_num sl_num, s.u_id u_id, s.sl_title sl_title, s.sl_content sl_content, s.sl_time sl_time, s.sl_price sl_price, s.sl_regdate sl_regdate, s.sl_hits sl_hits, s.bl_id bl_id, i.priimg_num priimg_num, i.priimg_path priimg_path, i.priimg_name priimg_name, p.pri_num pri_num, p.pri_title pri_title, p.pri_addr pri_addr, p.pri_weekprice pri_weekprice, p.pri_weekendprice pri_weekendprice, p.pri_lat pri_lat, p.pri_long pri_long, l.bl_date bl_date, u.u_ipath u_ipath, u.u_iname u_iname 
+FROM (select * from sharelot2 WHERE sl_num = #{sl_num}) s, booklot l, (select * from privatelot where pri_booktype = '일단위') p, privateimage i ,userinfo u
+WHERE s.bl_id = l.bl_id AND l.pri_num = p.pri_num AND l.u_id = u.u_id AND p.pri_num = i.pri_num 
+ORDER BY s.SL_NUM DESC
+</select>
+<!-- detail 조회 -->	
+<select id="shareDetail" parameterType="sharevo" resultType="yolo.share.dto.ShareMainListVO" >
+Select s.sl_num sl_num, s.u_id u_id, s.sl_title sl_title, s.sl_content sl_content, s.sl_time sl_time, s.sl_price sl_price, s.sl_regdate sl_regdate, s.sl_hits sl_hits, s.bl_id bl_id, i.priimg_num priimg_num, i.priimg_path priimg_path, i.priimg_name priimg_name, p.pri_num pri_num, p.pri_title pri_title, p.pri_addr pri_addr, p.pri_weekprice pri_weekprice, p.pri_weekendprice pri_weekendprice, p.pri_lat pri_lat, p.pri_long pri_long, l.bl_date bl_date, u.u_ipath u_ipath, u.u_iname u_iname 
+FROM (select * from sharelot2 where sl_num = #{sl_num}) s, booklot l, (select * from privatelot where pri_booktype = '일단위') p, privateimage i ,userinfo u
+WHERE s.bl_id = l.bl_id AND l.pri_num = p.pri_num AND l.u_id = u.u_id AND p.pri_num = i.pri_num 
+ORDER BY s.SL_NUM DESC
+</select>
+<!-- 등록 sql -->
+<insert id="shareInsert" parameterType="sharevo"> <!-- insert,delete,update는 리턴타입 필요없음 -->
+	INSERT INTO SHARELOT2
+	(sl_num, u_id, sl_title, sl_content, sl_time, sl_price, sl_regdate, sl_hits, bl_id)
+	VALUES
+	(SHARELOT_NO_SEQ.nextval, #{u_id}, #{sl_title}, #{sl_content}, #{sl_time}, '50000', sysdate , 0 , #{bl_id})
+</insert>
+<!-- list 조회 -->
+<select id="shareList" parameterType="yolo.share.dto.SharePagingVO" resultType="yolo.share.dto.ShareMainListVO">
+<![CDATA[
+SELECT b.rnum rnum, b.sl_num sl_num, b.u_id u_id, b.sl_title sl_title, b.sl_content sl_content, b.sl_time sl_time, b.sl_price sl_price, b.sl_regdate sl_regdate, b.sl_hits sl_hits, b.bl_id bl_id, b.priimg_num priimg_num, b.priimg_path priimg_path, b.priimg_name priimg_name, b.pri_num pri_num, b.pri_title pri_title, b.pri_addr pri_addr, b.pri_weekprice pri_weekprice, b.pri_weekendprice pri_weekendprice, b.pri_lat pri_lat, b.pri_long pri_long, b.bl_date bl_date, b.u_ipath u_ipath, b.u_iname u_iname 
+FROM  (Select rownum rnum, a.sl_num sl_num, a.u_id u_id, a.sl_title sl_title, a.sl_content sl_content, a.sl_time sl_time, a.sl_price sl_price, a.sl_regdate sl_regdate, a.sl_hits sl_hits, a.bl_id bl_id, a.priimg_num priimg_num, a.priimg_path priimg_path, a.priimg_name priimg_name, a.pri_num pri_num, a.pri_title pri_title, a.pri_addr pri_addr, a.pri_weekprice pri_weekprice, a.pri_weekendprice pri_weekendprice, a.pri_lat pri_lat, a.pri_long pri_long, a.bl_date bl_date, a.u_ipath u_ipath, a.u_iname u_iname 
+      FROM (Select s.sl_num sl_num, s.u_id u_id, s.sl_title sl_title, s.sl_content sl_content, s.sl_time sl_time, s.sl_price sl_price, s.sl_regdate sl_regdate, s.sl_hits sl_hits, s.bl_id bl_id, i.priimg_num priimg_num, i.priimg_path priimg_path, i.priimg_name priimg_name, p.pri_num pri_num, p.pri_title pri_title, p.pri_addr pri_addr, p.pri_weekprice pri_weekprice, p.pri_weekendprice pri_weekendprice, p.pri_lat pri_lat, p.pri_long pri_long, l.bl_date bl_date, u.u_ipath u_ipath, u.u_iname u_iname 
+            FROM sharelot2 s, (select * from booklot where bl_date >= to_char(sysdate,'YYYY-MM-DD')) l, (select * from privatelot where pri_booktype = '일단위') p, privateimage i ,userinfo u
+            WHERE s.bl_id = l.bl_id AND l.pri_num = p.pri_num AND l.u_id = u.u_id AND p.pri_num = i.pri_num 
+            ORDER BY s.SL_NUM DESC) a
+      WHERE ROWNUM <= #{endCount}) b
+WHERE b.rnum>= #{startCount}
+]]>
+</select>
+<!-- list 게시물 총 조회 -->
+<select id="shareTotalgetCount" resultType="int">
+<![CDATA[
+SELECT COUNT(*) totalCount 
+FROM sharelot2 s, (select * from booklot where bl_date >= to_char(sysdate,'YYYY-MM-DD')) b, (select * from privatelot where pri_booktype = '일단위') p, privateimage i 
+WHERE s.bl_id = b.bl_id AND b.pri_num = p.pri_num AND p.pri_num = i.pri_num
+]]>
+</select>
+
+
+<!-- 글 등록하기 위해 회원이 예약한 list 뿌리기   -->
+<select id="shareInputList" parameterType="string" resultType="shareinputlist">
+SELECT i.priimg_num priimg_num, i.priimg_path priimg_path, i.priimg_name priimg_name, p.pri_num pri_num, p.pri_title pri_title, p.pri_addr pri_addr, b.bl_id bl_id, b.u_id u_id, b.bl_date bl_date
+FROM (select * from privatelot where pri_booktype = '일단위') p , (select * FROM(select * from booklot where bl_id not in (select o.bl_id bl_id from sharelot2 h, booklot o where o.bl_id = h.bl_id)) e WHERE e.bl_date >= to_char(SYSDATE, 'YYYY-MM-DD')) b, privateimage i
+WHERE b.U_ID = #{uid} and  p.pri_num = b.pri_num and i.PRI_NUM = p.pri_num
+</select>
+
+<select id="alllist" resultType="yolo.share.dto.ShareMainListVO">
+SELECT DISTINCT i.priimg_name priimg_name, p.pri_addr pri_addr, p.pri_lat pri_lat, p.pri_long pri_long, p.pri_weekprice pri_weekprice, p.pri_num pri_num
+FROM sharelot2 s, (select * from booklot where bl_date >= to_char(sysdate,'YYYY-MM-DD')) b, (select * from privatelot where pri_booktype = '일단위') p, privateimage i 
+WHERE s.bl_id = b.bl_id AND b.pri_num = p.pri_num AND p.pri_num = i.pri_num
+</select>
+
+</mapper>

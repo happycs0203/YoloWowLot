@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+.row {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.myshareform{
+	background-color: #ffffff;
+}
+
+.propWidget-1{
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+
+#share{
+	background-color:white;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid rgba(255, 255, 255, 0);
+	margin-top: 10px;
+}
+
+img{
+ 	width: 100%;
+ 	height: 24%;
+ }
+
+.btn-group-justified{
+	margin-bottom: 44px;
+    margin-top: 11px;
+}
+
+h1, .h1, h2, .h2, h3, .h3{
+	margin-bottom: 3%;
+}
+
+hr {
+    margin-top: 0;
+    margin-bottom: 27px;
+    border: 0;
+    border-top: 2px solid #ff7c00;
+}
+
+@media(max-width:768px){
+	hr{
+	margin-top: 5%;
+	}
+}
+
+.btn-group, .btn-group-vertical{
+	
+	display: inline-block;
+}

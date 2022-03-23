@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="yolo.host.dto.HostinfoVO" alias="hvo" />
+		<typeAlias type="yolo.lot.dto.PrivatelotVO" alias="privateVO" />
+		<typeAlias type="yolo.lot.dto.PrivateimageVO" alias="primgVO" />
+		<typeAlias type="yolo.lot.dto.PostscriptVO" alias="postVO" />
+		<typeAlias type="yolo.lot.dto.ZipcodeVO" alias="zipcodeVO" />
+		<typeAlias type="yolo.lot.dto.LotListVO" alias="lotlistVO" />
+		<typeAlias type="yolo.share.dto.ShareVO" alias="sharevo" />
+		<typeAlias type="yolo.club.dto.ClubVO" alias="ClubVO" />
+		<typeAlias type="yolo.share.dto.InputListVO" alias="shareinputlist" />
+		
+	</typeAliases>
+</configuration>

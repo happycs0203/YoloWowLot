@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+.home-content h2 {
+	padding: 0 0 10px 0;
+}
+
+.userWidget-2 {
+	margin-bottom: 0px;
+}
+
+.blog-r-nav li {
+	padding-bottom: 1px;
+}
+
+.filterForm{
+    padding: 0 5px;
+}
+.filter{
+	margin: 0 0 15px 0;
+	width: 140%;
+}
+.blog-r-nav{
+    padding-bottom: 0px;
+}
+
+a.handleFilter{
+	margin: 5px 5px 0 0;
+}
+
+.article h4 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0 20px;
+    line-height: 26px;
+}
+
+.myclubform{
+	background-color: #ffffff;
+}
+.row {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.propWidget-1{
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+
+#club{
+	background-color:white;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid rgba(255, 255, 255, 0);
+	margin-top: 10px;
+}
+
+img{
+ 	width: 100%;
+ 	height: 24%;
+ }
+ 
+ #reserveimage{
+   width: 100%;
+   height: auto;
+ }
+
+.btn-group-justified{
+	margin-bottom: 44px;
+    margin-top: 11px;
+}
+
+h1, .h1, h2, .h2, h3, .h3{
+	margin-bottom: 3%;
+}
+
+hr {
+    margin-top: 0;
+    margin-bottom: 27px;
+    border: 0;
+    border-top: 2px solid #ff7c00;
+}
+
+@media(max-width:768px){
+	hr{
+	margin-top: 5%;
+	}
+}
+	
+@media(max-witdh:768px){
+	.filter{
+		margin-left: -58px;
+	}
+}
+
+.image-block img{
+	width: 75%;
+    height: 75%;
+}
+
+.btn-group, .btn-group-vertical{
+	display: inline-block;

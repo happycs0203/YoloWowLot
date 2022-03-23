@@ -1,0 +1,32 @@
+.panel{
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0);
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+	background-color: #ffffff;
+}
+
+@media(max-width: 768px){
+	img {
+		display: none;
+	}
+	
+	.btn-o.btn-green{
+		float: right;
+	}
+}
+
+@media screen and (max-width: 767px){
+	.table > tbody > tr > td {
+	    font-size: 11px;
+	    padding: 10px 10px;
+	}
+}
+
+.panel.dd .panel-body {
+    font-size: 12px;
+}
+
+item active {
+	overflow: auto;
+}

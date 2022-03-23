@@ -1,0 +1,97 @@
+@CHARSET "UTF-8";
+
+#chat_div{
+	width:300px;
+	background-color: #fff;
+}
+/* @media screen and (max-width: 1199px) { */
+	
+	
+/* } */
+/* @media screen and (max-width: 991px) { */
+	
+/* } */
+#chat_input{
+	width: 300px;
+	top:520px;
+}
+.chat_ul{
+	width: 300px;
+}
+
+@media screen and (max-width: 767px){
+	.chat_ul{
+		width: 100%;
+	}
+	.headerUserWraper > .headerNotifyWraper{
+		display:block;
+		visibility: visible;
+		position: initial;
+		float: right;
+		width:100%;
+		height:100%;
+	}
+	#chat_input{
+		width: 100%;
+		top:auto;
+	}
+	#menu_msg_btn{
+	display: none;
+	}	
+	#chat_div{
+	position:absolute;
+	top:100%;
+		background-color: #fff;
+		display:block;
+		visibility:visible;
+		width:100%;
+/* 		height: 100%; */
+		right:0;
+		left: auto;
+		margin-top:0;
+	}
+	#chat_view{
+		position:absolute;
+		right:0;
+		left: 0;
+		background-color: #fff;
+	}
+}
+@media screen and (max-width: 480px) {
+	.chat_ul{
+		width: 100%;
+	}
+	.headerUserWraper > .headerNotifyWraper{
+		display:block;
+		visibility: visible;
+		position: initial;
+		float: right;
+		width:100%;
+		height:100%;
+	}
+	#chat_input{
+		width: 100%;
+		top:auto;
+	}
+	#menu_msg_btn{
+	display: none;
+	}
+	#chat_div{
+	position:absolute;
+	top:100%;
+		background-color: #fff;
+		display:block;
+		visibility:visible;
+		width:100%;
+/* 		height: 100%; */
+		right:0;
+		left: auto;
+		margin-top:0;
+	}
+	#chat_view{
+		position:absolute;
+		right:0;
+		left: 0;
+		background-color: #fff;
+	}
+}

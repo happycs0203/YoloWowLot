@@ -1,0 +1,152 @@
+
+<!--************** hostmain css **************** -->
+#home-title {
+	font-size: 40px;
+	font-family: FontAwesome;
+	color: white;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+#home_subtitle {
+	font-size: 20px;
+	color: white;
+	padding-bottom: 20px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#space>#bregister, #bmanage {
+	width: 100%;
+	max-width: 200px;
+	height: 40px;
+	margin: 5px;
+	float: none;
+}
+
+#hostregister {
+	margin-top: 10px;
+	float: right;
+}
+
+#img {
+	width: 100%;
+	max-width: 180px;
+	height: 180px;
+}
+
+<!--hostinput css------>
+.ratio {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+
+.img-circle { 	 
+	border-radius: 50%;
+}
+
+#ImagePreview {
+	display: block;
+	width: 100%;
+	height: 30%;
+}
+
+#panel {
+	height: 100%;
+}
+
+.form-horizontal{
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+
+#hostregister{
+	margin-top:0px;
+	height: 40px;
+	width: 90px;
+	padding: 12px 0 0 0;
+	margin-top: 10px;
+	margin-right: 10px;
+	font-size: 13px;	
+}
+
+#hostcenter{
+	margin-top:0px;
+	padding: 20px;
+}
+
+
+<!--hostBook css ----->
+
+
+
+body {
+	scrollbar-face-color: #F6F6F6;
+	scrollbar-highlight-color: #bbbbbb;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-shadow-color: #bbbbbb;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #bbbbbb;
+	margin-left: "0px";
+	margin-right: "0px";
+	margin-top: "0px";
+	margin-bottom: "0px";
+}
+
+td {
+	font-family: FontAwesome;
+	font-size: 10pt;
+	color: #595959;
+}
+
+th {
+	font-family: FontAwesome;
+	font-size: 10pt;
+	color: #000000;
+}
+
+select {
+	font-family: FontAwesome;
+	font-size: 11pt;
+	color: #595959;
+}
+
+.divDotText {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+A:link {
+	font-size: 11pt;
+	font-family: FontAwesome;
+	color: #000000;
+	text-decoration: none;
+}
+
+A:visited {
+	font-size: 11pt;
+	font-family: FontAwesome;
+	color: #000000;
+	text-decoration: none;
+}
+
+A:active {
+	font-size: 11pt;
+	font-family: FontAwesome;
+	color: red;
+	text-decoration: none;
+}
+
+A:hover {
+	font-size: 11pt;
+	font-family: FontAwesome;
+	color: red;
+	text-decoration: none;
+}
+
+#home-wrapper{
+	background-color:white;
+}

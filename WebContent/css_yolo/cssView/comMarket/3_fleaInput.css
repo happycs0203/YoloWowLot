@@ -1,0 +1,11 @@
+.radio.custom-radio label{
+	margin-right: 3%;
+}
+
+.form-control{
+	width: 100%; 
+	padding-right: 4px;
+}
+.col-md-6 .btn-o.btn-green.add{
+	float: right;
+}

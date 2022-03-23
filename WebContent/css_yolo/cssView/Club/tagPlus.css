@@ -1,0 +1,28 @@
+.singleTop ul.tags {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    float: left;
+}
+
+.singleTop ul.tags li {
+	margin: 4px 4px 0;
+	padding: 0 11px;
+	font-size: 13px;
+	border-radius: 28px;
+	background-color: white;
+	border: 1px solid silver;
+	float: left;
+}
+
+.panel-body .tag{
+    margin: 4px 4px 0;
+    padding: 0 11px;
+    font-size: 13px;
+    border-radius: 28px;
+    background-color: white;
+    border: 1px solid silver;
+    float: left;
+}

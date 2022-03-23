@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="appliedlot">
+
+<!-- appliedLot List 출력 sql -->
+<select id="applotlist" parameterType="hashmap" resultType="yolo.mypage.appliedlot.dto.BookedlotVO">
+	SELECT B.U_ID U_ID, B.PRI_NUM PRI_NUM, P.PRI_TITLE PRI_TITLE, I.PRIIMG_NAME PRIIMG_NAME, B.BL_DATE BL_DATE, B.BL_PAY BL_PAY, P.PRI_BOOKTYPE PRI_BOOKTYPE
+	FROM BOOKLOT B JOIN PRIVATELOT P
+	ON B.PRI_NUM = P.PRI_NUM
+	JOIN PRIVATEIMAGE I
+	ON P.PRI_NUM = I.PRI_NUM
+	WHERE B.U_ID = #{user}
+</select>
+
+</mapper>

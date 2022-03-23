@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="host">
+
+<resultMap type="lotlistVO" id="lotlistMap">
+		<result column="priimg_num" property="priimg_num" />
+		<result column="priimg_path" property="priimg_path" />
+		<result column="priimg_name" property="priimg_name" />
+		<result column="pri_num" property="pri_num" />
+		<result column="h_num" property="h_num" />
+		<result column="pri_type" property="pri_type" />
+		<result column="pri_charge" property="pri_charge" />
+		<result column="pri_booktype" property="pri_booktype" />
+		<result column="pri_title" property="pri_title" />
+		<result column="pri_addr" property="pri_addr" />
+		<result column="pri_tag" property="pri_tag" />
+		<result column="pri_content" property="pri_content" />
+		<result column="pri_info" property="pri_info" />
+		<result column="p_category" property="pCategory" />
+		<result column="pri_account" property="pri_account" />
+		<result column="pri_weekprice" property="pri_weekprice" />
+		<result column="pri_weekendprice" property="pri_weekendprice" />
+		<result column="pri_facility" property="pri_facility" />
+		<result column="pri_minpeople" property="pri_minpeople" />
+		<result column="pri_maxpeople" property="pri_maxpeople" />
+		<result column="pri_weekdayo" property="pri_weekdayo" />
+		<result column="pri_weekdaye" property="pri_weekdaye" />
+		<result column="pri_weekendo" property="pri_weekendo" />
+		<result column="pri_weekende" property="pri_weekende" />
+		<result column="pri_lat" property="pri_lat" />
+		<result column="pir_long" property="pir_long" />
+		<result column="pri_tel" property="pri_tel" />
+		<result column="pri_web" property="pri_web" />
+		<result column="pri_bookcount" property="pri_bookcount" />
+		<result column="pri_bookmark" property="pri_bookmark" />
+		<result column="pri_regdate" property="pri_regdate" />
+		<result column="pri_confirm" property="pri_confirm" />
+	</resultMap>
+
+
+
+<insert id="hostInputok" parameterType="hvo">
+	insert into HOSTINFO(h_num, h_name, h_content, u_id)
+	values(concat('h_', HOST_NO_SEQ.nextVal),#{h_name},#{h_content}, #{u_id})
+	</insert>
+
+<select id="hostmylotlist" parameterType="lotlistVO" resultMap="lotlistMap">
+ select i.priimg_name priimg_name, p.pri_weekprice pri_weekprice, p.pri_title pri_title, p.pri_addr pri_addr, p.pri_num pri_num,h_num
+      from privatelot p  JOIN privateimage i
+      ON p.pri_num = i.pri_num
+      WHERE h_num = #{h_num}
+</select>
+
+<select id="getlotlist" parameterType="privateVO" resultType="privateVO">
+	select pri_num, h_num, pri_type, pri_charge, pri_booktype, pri_title, pri_addr,
+	pri_tag, pri_content, pri_info, pri_account, pri_weekprice, pri_weekendprice, pri_facility, pri_minpeople, pri_maxpeople, pri_weekdayo, pri_weekdaye, pri_weekendo, pri_weekende, pri_lat, pri_long, pri_tel, pri_web
+	from privatelot
+	where pri_num = #{pri_num}
+</select>
+
+<delete id="lotdelete" parameterType="lotlistVO">
+DELETE FROM privatelot WHERE pri_num = #{pri_num}
+</delete>
+
+<select id="getlot" parameterType="lotlistVO" resultMap="lotlistMap">
+	 SELECT i.priimg_name priimg_name, p.pri_title pri_title, p.pri_weekprice pri_weekprice, p.pri_addr pri_addr, p.pri_tag pri_tag,
+	 p.pri_content pri_content, p.pri_facility pri_facility, p.pri_num pri_num,p.pri_lat,p.pri_long
+	 FROM privatelot p JOIN privateimage i
+	 ON p.pri_num = i.pri_num
+	 WHERE p.pri_num = #{pri_num}
+</select>
+	
+<select id="booklist" resultType="yolo.lot.dto.BooklotVO" parameterType="lotlistVO">
+	select bl_id, u_id, bl_time, bl_date, bl_name, bl_tel, bl_pay
+	from booklot
+	where pri_num = #{pri_num}
+</select>
+
+<select id="getentre" parameterType="hashmap" resultType="yolo.host.dto.EntrepreneurVO">
+	select e_num, h_num, e_type, e_title, e_addr, e_rnum, e_fname, e_fpath
+	from entrepreneur
+	where h_num = #{h_num}
+</select>
+
+<update id="lotmodify" parameterType="privateVO">
+	UPDATE PRIVATELOT
+	SET pri_type = #{pri_type}, pri_charge = #{pri_charge}, pri_booktype = #{pri_booktype}, pri_title = #{pri_title}, pri_addr = #{pri_addr},
+	    pri_tag = #{pri_tag}, pri_content = #{pri_content}, pri_info = #{pri_info}, pri_account = #{pri_account},
+	    pri_weekprice = #{pri_weekprice}, pri_weekendprice = #{pri_weekendprice}, pri_facility=#{pri_facility}, pri_minpeople=#{pri_minpeople},
+	    pri_maxpeople = #{pri_maxpeople}, pri_weekdayo = #{pri_weekdayo}, pri_weekdaye=#{pri_weekdaye}, pri_weekendo=#{pri_weekendo},
+	    pri_weekende = #{pri_weekende}, pri_lat = #{pri_lat}, pri_long=#{pri_long}, pri_tel=#{pri_tel}, pri_web=#{pri_web}
+    where pri_num = #{pri_num}
+</update>
+
+	
+</mapper>

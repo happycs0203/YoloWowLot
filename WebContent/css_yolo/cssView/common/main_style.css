@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+
+#modal_login_btn, #modal_join_btn {
+	width:100%;
+}
+
+#mainbody > .mainpage_wrapper{
+	margin: 60px 0 0 0;
+}
+
+/*상단메뉴 - 로그인,회원가입버튼*/
+#web_login_btn, #web_join_btn{
+	margin: 10px 5px 0 0;
+}
+
+#signdiv{
+/* 	display: -webkit-box; */
+}
+
+/*상단메뉴 - 호스트버튼*/
+#hostbtn {
+	height: 40px;
+	width: 90px;
+	padding: 10px 0 0 0;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+#footer_title {
+	font-size: 3em;
+}
+
+.home-footer {
+	position: relative;
+}
+
+/* 쓰리버튼 메인용 스타일시트 추가*/
+#menu1 {
+	background-image: url("/Yolo/images_yolo/common/lot.jpg");
+	background-size: cover;
+}
+
+#menu1>a>h3 {
+	font-size: 3em;
+	padding-top: 28px;
+}
+
+#menu2 {
+	background-image: url("/Yolo/images_yolo/common/club.jpg");
+	background-size: cover;
+}
+
+#menu2>a>h3 {
+	font-size: 3em;
+	padding-top: 28px;
+}
+
+#menu3 {
+	background-image: url("/Yolo/images_yolo/common/share.jpg");
+	background-size: cover;
+}
+
+#menu3>a>h3 {
+	font-size: 3em;
+	padding-top: 28px;
+}
+
+#header_title {
+	margin-top:10px;
+	padding-top: 2px;
+	font-weight: 300;
+	letter-spacing: 5px;
+	margin-bottom: 0;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+#header_subtitle {
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+	letter-spacing: 3px;
+	color: grey;
+}
+
+#lefynav_menu_ul>li>a {
+	padding-top: 20px;
+	height: 60px;
+}
+
+#lefynav_menu_ul>li>a>.navLabel {
+	font-size: 14px;
+	font-weight: 300;
+}

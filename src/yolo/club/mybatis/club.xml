@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="club">
+
+	<!-- club 등록 sql -->
+	<insert id = "clubInsert" parameterType="yolo.club.dto.ClubVO">
+		INSERT INTO CLUB 
+		VALUES( concat('c_', CLUB_NO_SEQ.nextval), #{u_id}, #{c_type}, #{c_title}, #{c_tag}, 
+		#{c_people}, #{c_recruit}, #{c_period}, #{c_date}, #{c_place}, #{c_content}, 'n', sysdate, 0, 0, 0)
+	</insert>
+	<insert id = "clubimgInsert" parameterType="yolo.club.dto.ClubImageVO">
+		<selectKey keyColumn="c_num" keyProperty="c_num" order="BEFORE" resultType='string'>
+	         SELECT concat('c_',CLUB_NO_SEQ.currval) FROM dual
+		</selectKey>
+		INSERT INTO CLUBIMAGE (CIMG_NUM , C_NUM , CIMG_PATH , CIMG_NAME) 
+		VALUES(concat('cimg_', CLUBIMAGE_NO_SEQ.nextval), #{c_num}, #{cimg_path}, #{cimg_name})
+	</insert>
+
+	<!-- club 예약한 공간 list 출력 -->
+	<select id="clubinputList" parameterType="string" resultType="yolo.share.dto.InputListVO">
+		SELECT B.BL_DATE B_DATE, B.BL_ID BL_ID, P.PRI_NUM PRI_NUM, P.PRI_TITLE PRI_TITLE, I.PRIIMG_NAME PRIIMG_NAME, P.PRI_ADDR PRI_ADDR 
+		FROM PRIVATELOT P, BOOKLOT B, PRIVATEIMAGE I
+		WHERE P.PRI_NUM = B.PRI_NUM AND I.PRI_NUM = P.PRI_NUM AND B.U_ID = #{user}
+	</select>
+
+	<!-- list 모든 게시물 갯수 조회 -->
+	<select id="clubTotalgetCount" resultType="int">
+	SELECT COUNT(*) totalCount 
+	FROM CLUB 
+	</select>
+	
+	<!-- club List 출력 sql -->
+	<select id = "clublistview" parameterType="yolo.club.dto.ClubPagingVO" resultType="yolo.club.dto.ClubListVO">
+	<![CDATA[
+		SELECT b.rnum rnum, b.C_NUM C_NUM, b.CIMG_NAME CIMG_NAME, b.C_TYPE C_TYPE, b.C_TITLE C_TITLE, b.c_people c_people, b.C_PERIOD C_PERIOD, b.C_DATE C_DATE, b.C_PLACE C_PLACE, b.C_ENTRY C_ENTRY, b.C_HITS C_HITS
+		FROM (Select rownum rnum, a.C_NUM C_NUM, a.CIMG_NAME CIMG_NAME, a.C_TYPE C_TYPE, a.C_TITLE C_TITLE, a.c_people c_people, a.C_PERIOD C_PERIOD, a.C_DATE C_DATE, a.C_PLACE C_PLACE, a.C_ENTRY C_ENTRY, a.C_HITS C_HITS
+		      FROM (SELECT C.C_NUM C_NUM, I.CIMG_NAME CIMG_NAME, C.C_TYPE C_TYPE, C.C_TITLE C_TITLE, C.c_people c_people, C.C_PERIOD C_PERIOD, C.C_DATE C_DATE, C.C_PLACE C_PLACE, C.C_ENTRY C_ENTRY, C.C_HITS C_HITS
+		            FROM CLUB C JOIN CLUBIMAGE I
+		            ON c.c_num = i.c_num 
+		            ORDER BY to_number(substr(C.C_NUM, 3))DESC) a
+		      WHERE ROWNUM <= #{endCount}) b
+		WHERE b.rnum >= #{startCount}
+	]]>
+	</select>
+	
+	<!-- list 검색된 게시물 갯수 조회 -->
+	<select id="clubSearchgetCount" parameterType="hashmap" resultType="int">
+	SELECT COUNT(*) totalCount 
+	FROM (SELECT C.C_NUM C_NUM, I.CIMG_NAME CIMG_NAME, C.C_TYPE C_TYPE, C.C_TITLE C_TITLE, C.c_people c_people, C.C_PERIOD C_PERIOD, C.C_DATE C_DATE, C.C_PLACE C_PLACE, C.C_ENTRY C_ENTRY, C.C_HITS C_HITS
+		FROM CLUB C JOIN CLUBIMAGE I
+		ON c.c_num = i.c_num
+		<where>
+			<choose>
+				<when test= "keyWord != null">
+					C.C_TYPE like #{keyWord}
+				</when>
+				<when test="locations != null">
+					<foreach collection="locations" item="one" index="index" open="(" close=")" separator="or">
+						C.C_PLACE like #{one} ||'%'
+					</foreach>
+				</when>
+			</choose>
+		</where>
+		)
+	</select>
+	
+	<!-- club keyword Search 출력 sql -->
+	<select id = "clubsearhKey" parameterType="hashmap" resultType="yolo.club.dto.ClubListVO">
+	<![CDATA[
+		SELECT b.rnum rnum, b.C_NUM C_NUM, b.CIMG_NAME CIMG_NAME, b.C_TYPE C_TYPE, b.C_TITLE C_TITLE, b.c_people c_people, b.C_PERIOD C_PERIOD, b.C_DATE C_DATE, b.C_PLACE C_PLACE, b.C_ENTRY C_ENTRY, b.C_HITS C_HITS
+		FROM (Select rownum rnum, a.C_NUM C_NUM, a.CIMG_NAME CIMG_NAME, a.C_TYPE C_TYPE, a.C_TITLE C_TITLE, a.c_people c_people, a.C_PERIOD C_PERIOD, a.C_DATE C_DATE, a.C_PLACE C_PLACE, a.C_ENTRY C_ENTRY, a.C_HITS C_HITS
+		      FROM (SELECT C.C_NUM C_NUM, I.CIMG_NAME CIMG_NAME, C.C_TYPE C_TYPE, C.C_TITLE C_TITLE, C.C_PEOPLE C_PEOPLE, C.C_PERIOD C_PERIOD, C.C_DATE C_DATE, C.C_PLACE C_PLACE, C.C_ENTRY C_ENTRY, C.C_HITS C_HITS
+		            FROM CLUB C JOIN CLUBIMAGE I
+		            ON c.c_num = i.c_num
+		            WHERE C.C_TYPE like #{keyWord} 
+		            ORDER BY to_number(substr(C.C_NUM, 3))DESC) a
+		      WHERE ROWNUM <= #{endCount}) b
+		WHERE b.rnum >= #{startCount}
+	]]>
+	</select>
+	
+	<!-- club location Search 출력 sql -->
+	<select id = "clubsearhLoc" parameterType="hashmap" resultType="yolo.club.dto.ClubListVO">
+		SELECT b.rnum rnum, b.C_NUM C_NUM, b.CIMG_NAME CIMG_NAME, b.C_TYPE C_TYPE, b.C_TITLE C_TITLE, b.c_people c_people, b.C_PERIOD C_PERIOD, b.C_DATE C_DATE, b.C_PLACE C_PLACE, b.C_ENTRY C_ENTRY, b.C_HITS C_HITS
+		FROM (Select rownum rnum, a.C_NUM C_NUM, a.CIMG_NAME CIMG_NAME, a.C_TYPE C_TYPE, a.C_TITLE C_TITLE, a.c_people c_people, a.C_PERIOD C_PERIOD, a.C_DATE C_DATE, a.C_PLACE C_PLACE, a.C_ENTRY C_ENTRY, a.C_HITS C_HITS
+		      FROM (SELECT C.C_NUM C_NUM, I.CIMG_NAME CIMG_NAME, C.C_TYPE C_TYPE, C.C_TITLE C_TITLE, C.c_people c_people, C.C_PERIOD C_PERIOD, C.C_DATE C_DATE, C.C_PLACE C_PLACE, C.C_ENTRY C_ENTRY, C.C_HITS C_HITS
+					FROM CLUB C JOIN CLUBIMAGE I
+					ON c.c_num = i.c_num
+				 	WHERE 
+					<foreach collection="locations" item="one" index="index" open="(" close=")" separator="or">
+						C.C_PLACE like #{one} ||'%'
+					</foreach> 
+		            ORDER BY to_number(substr(C.C_NUM, 3))DESC) a
+	<![CDATA[
+		      WHERE ROWNUM <= #{endCount}) b
+		WHERE b.rnum >= #{startCount}
+	]]>
+	</select>
+	
+	<!-- club Detail view 출력 sql -->
+		<update id="clubviewcount" parameterType="yolo.club.dto.ClubListVO">
+		  UPDATE club SET c_hits = c_hits + 1
+		  WHERE c_num = #{c_num}
+		</update>
+	
+	<!-- club Detail view 출력 sql -->
+	<select id="clubdetail" parameterType="yolo.club.dto.ClubListVO" resultType="yolo.club.dto.ClubListVO">
+		SELECT C.C_NUM C_NUM, C.U_ID U_ID, I.CIMG_NAME CIMG_NAME, C.C_TYPE C_TYPE, C.C_TITLE C_TITLE, C.C_TAG C_TAG, C.C_PEOPLE C_PEOPLE, C.C_RECRUIT C_RECRUIT, 
+		C.C_PERIOD C_PERIOD, C.C_DATE C_DATE, C.C_PLACE C_PLACE, C.C_CONTENT C_CONTENT, C.C_REGDATE C_REGDATE, C.C_ENTRY C_ENTRY, C.C_HITS C_HITS
+	    FROM CLUB C JOIN CLUBIMAGE I
+		ON c.c_num = i.c_num
+		WHERE C.C_NUM = #{c_num}
+	</select>
+
+
+
+
+</mapper>

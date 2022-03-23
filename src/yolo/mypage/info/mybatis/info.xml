@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info">
+
+<select id="myinfoview" parameterType="yolo.user.dto.UserVO" resultType="yolo.user.dto.UserVO">
+SELECT * FROM userinfo where u_id = #{u_id}
+</select>
+
+<update id="myinfomodify" parameterType="yolo.user.dto.UserVO">
+UPDATE userinfo set u_pass = #{u_pass}, u_name = #{u_name}, u_tel = #{u_tel}, u_email = #{u_email}, u_birth = #{u_birth}, u_ipath = #{u_ipath}, u_addr = #{u_addr},u_iname = #{u_iname}
+WHERE u_id= #{u_id} 
+</update>
+
+</mapper>

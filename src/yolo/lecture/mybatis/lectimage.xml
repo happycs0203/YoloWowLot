@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lectimage">
+<insert id="insert" parameterType="yolo.lecture.dto.LectimageVO">
+INSERT INTO LECTIMAGE(LIMG_NUM,L_NUM,LIMG_PATH,LIMG_NAME) VALUES (LECTIMAGE_NO_SEQ.nextval, LECTURE_NO_SEQ.currval, #{limg_path},#{limg_name} )
+</insert>
+
+</mapper>

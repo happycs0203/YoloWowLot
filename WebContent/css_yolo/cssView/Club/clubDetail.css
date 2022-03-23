@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+<!-- clubdetail.css -->
+
+#club_title{
+	font-size: 23px;
+}
+
+#bookmarkC{
+	cursor:pointer;
+	color:coral;
+}
+
+.singleTop ul.users{
+   float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.singleTop ul.users li {
+    float: left;
+    margin-right: 3px;
+    color: #333;
+    font-size: 13px;
+    line-height: 13px;
+    list-style-type: none;
+}
+
+.singleTop ul.features li span {
+    color: #999;
+    display: block;
+    height: 24px;
+    font-size: 15px;
+}
+
+.mainFunction .contactBtn {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.mainFunction .applyBtn {
+    margin-bottom: 10px;
+    width: 100%;
+}

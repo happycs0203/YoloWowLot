@@ -1,0 +1,46 @@
+
+h1 #pageTitle{
+	font-size: 22px;
+	font-family: "NanumGothic";
+}
+
+#reservation{
+	margin-bottom: 10px;
+}
+
+#btn_next{
+	margin-bottom: 10px;
+}
+
+.list_wrap{
+  padding: 10px;
+  
+}
+
+.flex_box{
+	padding: 5px;
+}
+
+.tit{
+	font-size: 15px;
+	font-family: "NanumGothic";
+}
+
+
+<!--결제창css -->
+#pay{
+	padding: 4px;
+	border-bottom: 1px solid #ebebeb;
+}
+
+#lot_reserve{
+	padding: 8px; 
+	border-top: 2px solid #fc7937;
+}
+
+<!-- readonly css 바꾸기 -->
+#flex_txt{
+	cursor: default;
+}
+
+

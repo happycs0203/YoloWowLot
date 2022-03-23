@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+/* 시각 셀렉터 */
+#lec_timeselec{
+	height: 200px;
+	overflow: auto;
+	
+}
+
+.panel-heading{
+	background-color: #f5f5f5;
+}
+
+.ratio {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+
+.img-circle {
+	border-radius: 50%;
+}
+
+#imagePreview {
+	display: block;
+	width: 100%;
+}
+
+
+
+#btn_modify{
+	width: 150px;
+}
+
+#btn_addr{
+	width: 120px;
+	text-align : center;
+}
+
+.form-horizontal{
+	margin-bottom: 30px;
+}
+
+#home-wrapper{
+	background-color:white;
+}
+.addr{
+	padding-right: 0;
+    padding-left: 0;
+}

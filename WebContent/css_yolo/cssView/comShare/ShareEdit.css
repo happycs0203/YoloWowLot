@@ -1,0 +1,25 @@
+@media(max-width:768px){
+	.item{
+		overflow: auto;
+	}
+	.col-md-3{
+	    display: inline;
+	    padding: 0;
+	}
+	#nextbtn{
+		float: right;
+	}
+	.btn-o.btn-green {
+	    padding: 10px 15px;
+	    margin-left: 2px;
+	}
+}
+
+.time{
+	margin-top: 33px;
+}
+
+.btn-o.btn-warning {
+    margin-right: 7px;
+    margin-bottom: 4px;
+}

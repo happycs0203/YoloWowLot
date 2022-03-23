@@ -1,0 +1,46 @@
+.home-content h2 {
+	padding: 0 0 10px 0;
+}
+
+.userWidget-2 {
+	margin-bottom: 0px;
+}
+
+.blog-r-nav li {
+	padding-bottom: 1px;
+}
+
+.filterForm{
+    padding: 0 5px;
+}
+.filter{
+	margin: 0 0 15px 0;
+}
+.blog-r-nav{
+    padding-bottom: 0px;
+}
+
+a.handleFilter{
+	margin: 5px 5px 0 0;
+}
+
+.article h4 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0 20px;
+    line-height: 26px;
+}
+.article {
+    height: 380px;
+    margin-bottom: 5px;
+}
+
+.button {
+   float:
+}
+
+.cancel .cancelBtn {
+    margin-bottom: 20px;
+    width: 100%;
+}

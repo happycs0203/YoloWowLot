@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lot">
+
+	<resultMap type="lotlistVO" id="lotlistMap">
+		<result column="priimg_num" property="priimg_num" />
+		<result column="priimg_path" property="priimg_path" />
+		<result column="priimg_name" property="priimg_name" />
+		<result column="pri_num" property="pri_num" />
+		<result column="h_num" property="h_num" />
+		<result column="pri_type" property="pri_type" />
+		<result column="pri_charge" property="pri_charge" />
+		<result column="pri_booktype" property="pri_booktype" />
+		<result column="pri_title" property="pri_title" />
+		<result column="pri_addr" property="pri_addr" />
+		<result column="pri_tag" property="pri_tag" />
+		<result column="pri_content" property="pri_content" />
+		<result column="pri_info" property="pri_info" />
+		<result column="p_category" property="pCategory" />
+		<result column="pri_account" property="pri_account" />
+		<result column="pri_weekprice" property="pri_weekprice" />
+		<result column="pri_weekendprice" property="pri_weekendprice" />
+		<result column="pri_facility" property="pri_facility" />
+		<result column="pri_minpeople" property="pri_minpeople" />
+		<result column="pri_maxpeople" property="pri_maxpeople" />
+		<result column="pri_weekdayo" property="pri_weekdayo" />
+		<result column="pri_weekdaye" property="pri_weekdaye" />
+		<result column="pri_weekendo" property="pri_weekendo" />
+		<result column="pri_weekende" property="pri_weekende" />
+		<result column="pri_lat" property="pri_lat" />
+		<result column="pir_long" property="pir_long" />
+		<result column="pri_tel" property="pri_tel" />
+		<result column="pri_web" property="pri_web" />
+		<result column="pri_bookcount" property="pri_bookcount" />
+		<result column="pri_bookmark" property="pri_bookmark" />
+		<result column="pri_hits" property="pri_hits" />
+		<result column="pri_regdate" property="pri_regdate" />
+		<result column="pri_confirm" property="pri_confirm" />
+	</resultMap>
+    
+    <!-- 공간정보 입력  sql -->
+	<insert id="lotinput" parameterType="privateVO">
+		INSERT INTO
+		privatelot(pri_num,h_num,pri_type,pri_booktype,pri_charge,pri_title,pri_addr,pri_tag,
+		pri_content,pri_info,pri_account,pri_weekprice,
+		pri_weekendprice,pri_facility,pri_minpeople,pri_maxpeople,
+		pri_weekdayo,pri_weekdaye,pri_weekendo,pri_weekende,pri_lat,pri_long,
+		pri_tel,pri_web,pri_regdate)
+		VALUES(concat('pri_', PRIVATELOT_NO_SEQ.nextVal),#{h_num},#{pri_type},#{pri_booktype},#{pri_charge},#{pri_title},
+		#{pri_addr},#{pri_tag},#{pri_content},#{pri_info},#{pri_account},#{pri_weekprice},
+		#{pri_weekendprice},#{pri_facility},#{pri_minpeople},#{pri_maxpeople},
+		#{pri_weekdayo},#{pri_weekdaye},#{pri_weekendo},#{pri_weekende},#{pri_lat},#{pri_long},
+		#{pri_tel},#{pri_web}, to_char(sysdate,'yy/MM/dd') )
+	</insert>
+    
+     <!-- 공간정보이미지 입력 sql -->
+	<insert id="lotimginput" parameterType="primgVO">
+		<selectKey keyColumn='pri_num' keyProperty='pri_num' order='BEFORE'
+			resultType='string'>
+			SELECT concat('pri_', PRIVATELOT_NO_SEQ.currval) FROM dual
+		</selectKey>
+		insert into privateimage(priimg_num, pri_num ,priimg_name,
+		priimg_path)
+		values(concat('priimg_', PRIVATEIMAGE_NO_SEQ.nextVal), #{pri_num}, #{priimg_name}, #{priimg_path})
+	</insert>
+
+     <!-- 공간정보 리스트 출력 sql -->
+	<select id="lotlistview" resultMap="lotlistMap">
+	<![CDATA[
+	  SELECT b.rnum rnum, b.priimg_name priimg_name, b.pri_weekprice pri_weekprice, b.pri_title pri_title, b.pri_addr pri_addr, b.pri_num pri_num, b.pri_long pri_long, b.pri_lat pri_lat, b.pri_hits pri_hits, b.pri_kind pri_kind, b.pri_bookway pri_bookway, b.pri_holiday pri_holiday
+	  FROM(SELECT rownum rnum, a.priimg_name priimg_name, a.pri_weekprice pri_weekprice, a.pri_title pri_title, a.pri_addr pri_addr, a.pri_num pri_num, a.pri_long pri_long, a.pri_lat pri_lat, a.pri_hits pri_hits, a.pri_kind pri_kind, a.pri_bookway pri_bookway, a.pri_holiday pri_holiday
+	       FROM (SELECT i.priimg_name priimg_name, p.pri_weekprice pri_weekprice, p.pri_title pri_title, p.pri_addr pri_addr, p.pri_num pri_num, p.pri_long pri_long, p.pri_lat pri_lat, p.pri_hits pri_hits, p.pri_kind pri_kind, p.pri_bookway pri_bookway, p.pri_holiday pri_holiday 
+                  FROM privatelot p  JOIN privateimage i
+                   ON p.pri_num = i.pri_num
+                   ORDER BY  to_number(substr(p.pri_num, 5)) )a 
+           WHERE rownum <= #{endCount} )b
+      WHERE b.rnum >= #{startCount}
+      ]]>
+	</select>
+	
+	 <!-- 공간정보 검색 출력 sql -->
+	<select id="lotsearch" parameterType="hashmap" resultMap="lotlistMap">
+	  select i.priimg_name priimg_name, p.pri_weekprice pri_weekprice, p.pri_title pri_title, p.pri_addr pri_addr, p.pri_num pri_num, p.pri_long pri_long, p.pri_lat pri_lat, p.pri_kind pri_kind, p.pri_bookway pri_bookway, p.pri_holiday pri_holiday
+      from privatelot p JOIN privateimage i
+      ON p.pri_num = i.pri_num
+<!--       JOIN timetable t ON p.pri_num = t.pri_num -->
+      where #{rcount} > p.pri_minpeople AND p.pri_maxpeople > #{rcount} AND p.pri_addr like  #{sido} || '%' ||#{gugun}||'%' 
+      group by i.priimg_name, p.pri_weekprice, p.pri_title, p.pri_addr, p.pri_num, p.pri_long, p.pri_lat, p.pri_kind, p.pri_bookway, p.pri_holiday
+      ORDER BY  to_number(substr(p.pri_num, 5))
+	</select>
+	
+	 <!-- 공간상세정보 후기 리스트 출력 sql -->
+	<select id="lotreviewlist" parameterType="postVO" resultType="postVO">
+	 select u_id, ps_star, ps_content, pri_num, ps_regdate
+	 from postscript2 
+	 where pri_num = #{pri_num}
+	</select> 
+	
+	 <!-- 공간정보 후기 작성 입력 sql -->
+	<insert id="lotreview" parameterType="postVO">
+	 insert into POSTSCRIPT2(ps_num, pri_num, ps_star, u_id, ps_content, ps_regdate) 
+	 values(concat('ps_', POSTSCRIPT_NO_SEQ.nextVal), #{pri_num}, #{ps_star}, #{u_id} , #{ps_content}, to_char(sysdate,'yy/MM/dd')) 
+	</insert>
+	
+	 <!-- 공간정보 사업자정보 입력  sql -->
+	<insert id="entrepreneurinput" parameterType="yolo.host.dto.EntrepreneurVO">
+	 insert into ENTREPRENEUR(E_NUM, H_NUM, E_TYPE, E_TITLE, E_ADDR, E_RNUM, E_FNAME, E_FPATH)
+	 VALUES (concat('e_',ENTREPRENEUR_NO_SEQ.nextval),'21', #{e_type}, #{e_title}, #{e_addr}, #{e_rnum}, #{e_fname}, #{e_fpath})
+	</insert>
+	
+	 <!-- 공간상세정보  출력 sql -->
+	<select id="lotdetailview" parameterType="lotlistVO" resultMap="lotlistMap">
+	 SELECT i.priimg_name priimg_name, p.pri_title pri_title, p.pri_weekprice pri_weekprice, p.pri_addr pri_addr, p.pri_tag pri_tag, p.pri_booktype pri_booktype,
+	 p.pri_content pri_content, p.pri_facility pri_facility, p.pri_num pri_num,p.pri_lat,p.pri_long
+	 FROM privatelot p JOIN privateimage i
+	 ON p.pri_num = i.pri_num
+	 WHERE p.pri_num = #{pri_num}
+	</select>
+	
+	<update id="lotviewcount" parameterType="lotlistVO">
+	  UPDATE privatelot SET pri_hits = pri_hits + 1
+	  WHERE pri_num = #{pri_num}
+	</update>
+	
+	 <!-- 공간예약 정보 출력 sql -->
+	<select id="lotreserve" resultMap="lotlistMap">
+	 select i.priimg_name priimg_name, p.pri_title pri_title, p.pri_weekprice pri_weekprice, p.pri_facility pri_facility, p.pri_addr pri_addr, p.pri_num pri_num, p.pri_content pri_content, p.pri_booktype pri_booktype
+     from privatelot p JOIN privateimage i
+     ON p.pri_num = i.pri_num
+     WHERE p.pri_num = #{pri_num}
+	</select>
+	
+	 <!-- 공간예약 시간테이블 출력 sql -->
+	<select id="gettime" parameterType="yolo.lot.dto.TimetableVO" resultType="yolo.lot.dto.TimetableVO">
+	SELECT t_num, pri_num, t_date, t_time
+	FROM timetable
+	WHERE t_date = #{t_date} AND pri_num = #{pri_num}
+	</select>
+	
+	 <!-- 공간예약 입력 sql -->
+	<insert id="bookinsert" parameterType="yolo.lot.dto.BooklotVO">
+		INSERT INTO BOOKLOT(bl_id, u_id, pri_num, bl_name, bl_tel, bl_people, bl_date, bl_time, bl_pay)
+		VALUES (concat('bl_', BOOKLOT_NO_SEQ.nextVal), #{u_id},#{pri_num},#{bl_name},#{bl_tel},#{bl_people},#{bl_date},#{bl_time},#{bl_pay})
+	</insert>
+	
+	 <!-- 공간예약 시간입력 sql -->
+	<insert id="inserttime" parameterType="yolo.lot.dto.TimetableVO">
+		INSERT INTO TIMETABLE(T_NUM, PRI_NUM, T_DATE, T_TIME)
+		VALUES (concat('t_', TIMETABLE_NO_SEQ.nextVal), #{pri_num}, #{t_date}, #{t_time})
+	</insert> 
+	
+	 <!-- 공간예약 시간 수정 sql -->
+	<update id="updatetime" parameterType="yolo.lot.dto.TimetableVO">
+		UPDATE TIMETABLE
+		SET T_DATE = #{t_date}, T_TIME = #{t_time}
+		WHERE T_NUM = #{t_num}
+	</update>
+	
+	 <!-- 호스트정보 출력 sql -->
+	<select id="lothostselect" parameterType="hvo" resultType="hvo">
+	SELECT * FROM hostinfo WHERE u_id = #{u_id}
+	</select>
+    
+     <!-- 공간리스트 총 페이지 개수 출력 sql -->
+   <select id="lotcount" resultType="int">
+    SELECT COUNT(*) lotcount FROM privatelot
+   </select>
+
+</mapper>

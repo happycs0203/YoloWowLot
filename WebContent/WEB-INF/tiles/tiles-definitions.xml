@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+  <!-- lots Template -->
+ <definition name='lotTemplate' template="/WEB-INF/template/lot/template_lot.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/default/header.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp"></put-attribute>
+ 	<put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp"></put-attribute>
+ 	<put-attribute name="login" value="/WEB-INF/template/default/login.jsp"></put-attribute>
+ 	<put-attribute name="join" value="/WEB-INF/template/default/join.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*.lot' extends='lotTemplate'>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ </definition>
+ 
+ <!-- main Template -->
+  <definition name='mainTemplate' template="/WEB-INF/template/main/template_main.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/default/header.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp"></put-attribute>
+ 	<put-attribute name="login" value="/WEB-INF/template/default/login.jsp"></put-attribute>
+ 	<put-attribute name="join" value="/WEB-INF/template/default/join.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*.main' extends='mainTemplate'>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ </definition>
+
+ <!-- host Template -->
+  <definition name='hostTemplate' template="/WEB-INF/template/host/template_host.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/host/header_host.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/host/menu_host.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*.host' extends='hostTemplate'>
+ 	<put-attribute name="title" value='YoloWowLotHost'></put-attribute>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ </definition>
+ 
+  <!-- host Template -->
+  <definition name='nojshostTemplate' template="/WEB-INF/template/host/template_host_nojs.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/host/header_host.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/host/menu_host.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*.nohost' extends='nojshostTemplate'>
+ 	<put-attribute name="title" value='YoloWowLotHost'></put-attribute>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ </definition>
+ 
+ <!-- host modal Template -->
+  <definition name='hostTemplateModal' template="/WEB-INF/template/host/template_host_modal.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/host/header_host.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/host/menu_host.jsp"></put-attribute>
+ </definition>
+ <definition name='/*/*/*.host' extends='hostTemplateModal'>
+ 	<put-attribute name="title" value='YoloWowLotHost'></put-attribute>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ 	<put-attribute name="modal" value="/WEB-INF/template/modal/{3}.jsp"></put-attribute>
+ </definition>
+ 
+ <!-- modal Template -->
+ <definition name='modalTemplate' template="/WEB-INF/template/modal/template_modal.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/default/header.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp"></put-attribute>
+ 	<put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp"></put-attribute>
+ 	<put-attribute name="login" value="/WEB-INF/template/default/login.jsp"></put-attribute>
+ 	<put-attribute name="join" value="/WEB-INF/template/default/join.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*/*.modal' extends='modalTemplate'>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ 	<put-attribute name="modal" value="/WEB-INF/template/modal/{3}.jsp"></put-attribute>
+ </definition>
+ 
+  <definition name='/*/*/*/*.modal' extends='modalTemplate'>
+ 	<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp"></put-attribute>
+ 	<put-attribute name="modal" value="/WEB-INF/template/modal/{4}.jsp"></put-attribute>
+ </definition>
+ 
+  <!-- map Template -->
+ <definition name='mapTemplate' template="/WEB-INF/template/map/template_map.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/default/header.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp"></put-attribute>
+ 	<put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp"></put-attribute>
+ 	<put-attribute name="login" value="/WEB-INF/template/default/login.jsp"></put-attribute>
+ 	<put-attribute name="join" value="/WEB-INF/template/default/join.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*.map' extends='mapTemplate'>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ </definition>
+
+  <!-- map Template -->
+ <definition name='mapviewTemplate' template="/WEB-INF/template/map/template_map_view.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/default/header.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp"></put-attribute>
+ 	<put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp"></put-attribute>
+ 	<put-attribute name="login" value="/WEB-INF/template/default/login.jsp"></put-attribute>
+ 	<put-attribute name="join" value="/WEB-INF/template/default/join.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*.mapview' extends='mapviewTemplate'>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ </definition>
+ 
+<!--  no template -->
+<definition name='noTemplate' template='/WEB-INF/template/default/noTiles.jsp'>
+	<put-attribute name="noTemplate" value=''></put-attribute>
+</definition>
+
+<definition name='/*/*.notile' extends='noTemplate'>
+	<put-attribute name="noTemplate" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+</definition>
+
+<!-- default Template -->
+ <definition name='defaultTemplate' template="/WEB-INF/template/default/template.jsp">
+ 	<put-attribute name="header" value="/WEB-INF/template/default/header.jsp"></put-attribute>
+ 	<put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp"></put-attribute>
+ 	<put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp"></put-attribute>
+ 	<put-attribute name="login" value="/WEB-INF/template/default/login.jsp"></put-attribute>
+ 	<put-attribute name="join" value="/WEB-INF/template/default/join.jsp"></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*' extends='defaultTemplate'>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}.jsp'></put-attribute>
+ </definition>
+ 
+ <definition name='/*/*/*' extends='defaultTemplate'>
+ 	<put-attribute name="body" value='/WEB-INF/views/{1}/{2}/{3}.jsp'></put-attribute>
+ </definition>
+
+
+
+
+</tiles-definitions>

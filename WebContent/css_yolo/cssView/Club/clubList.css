@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+#content{
+	width: 100%;
+}
+
+.figure {
+    background-color: #000;
+    width: 100%;
+    max-height: 205px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.figure img {
+    position: relative;
+    display: block;
+	height: auto;
+    opacity: 1;
+}
+
+.btn{
+    margin-bottom: 5px;
+}
+
+.btn-green2 {
+	background-color: #0eaaa6;
+    color: #fff;
+}

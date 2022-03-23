@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#lec_title{
+	display: inline;
+	float: left;
+}
+#pa-user{
+	float:right;
+}
+#post-top{
+	padding-bottom: 0px;
+}
+#image_div{
+	text-align: center;
+}
+#btn_lecjoin{
+	padding-top:10px;
+	display: inline-block;
+}

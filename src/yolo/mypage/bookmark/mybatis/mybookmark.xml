@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybookmark">
+<select id="mybookmarkselect" resultType="yolo.mypage.bookmark.dto.BookmarkVO" parameterType="yolo.mypage.bookmark.dto.BookmarkVO">
+SELECT * FROM BOOKMARK WHERE u_id = #{u_id}
+</select>
+
+<select id="mybookmarkSelectLot" resultType="yolo.lot.dto.LotListVO"  parameterType="yolo.mypage.bookmark.dto.BookmarkVO">
+SELECT a.PRI_KIND PRI_KIND, a.priimg_name priimg_name, a.pri_weekprice pri_weekprice, a.pri_title pri_title, a.pri_addr pri_addr, a.pri_num pri_num, a.pri_long pri_long, a.pri_lat pri_lat, a.pri_hits pri_hits
+	       FROM (SELECT i.priimg_name priimg_name, p.PRI_KIND PRI_KIND, p.pri_weekprice pri_weekprice, p.pri_title pri_title, p.pri_addr pri_addr, p.pri_num pri_num, p.pri_long pri_long, p.pri_lat pri_lat, p.pri_hits pri_hits
+                  FROM privatelot p  JOIN privateimage i
+                   ON p.pri_num = i.pri_num
+ORDER BY  to_number(substr(p.pri_num, 5)) )a
+WHERE pri_num IN (SELECT BM_SELNUM FROM BOOKMARK WHERE BM_CATEGORY ='공간' AND u_id = #{u_id} )
+
+</select>
+</mapper>

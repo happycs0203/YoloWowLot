@@ -1,0 +1,12 @@
+.table {
+    
+    text-align: center;
+}
+.table > thead > tr > th {
+    border-top-right-radius: 2px;
+    text-align: center;
+}
+img {
+	height: 60px;
+	
+}

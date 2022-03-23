@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Yolo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!--  공유할 설정문서 등록  -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>/WEB-INF/springConfig/00_common/common-servlet.xml</param-value>
+  </context-param>
+  
+  <!-- The front controller for main -->
+	<servlet>
+		<servlet-name>springYoloWowLotMain</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/01_main/main-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotMain</servlet-name>
+		<url-pattern>*.main</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for lot -->
+	<servlet>
+		<servlet-name>springYoloWowLotLot</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/02_lot/lot-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotLot</servlet-name>
+		<url-pattern>*.lot</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for club -->
+	<servlet>
+		<servlet-name>springYoloWowLotClub</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/03_club/club-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotClub</servlet-name>
+		<url-pattern>*.club</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for lecture -->
+	<servlet>
+		<servlet-name>springYoloWowLotLecture</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/04_lecture/lecture-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotLecture</servlet-name>
+		<url-pattern>*.lecture</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for market -->
+	<servlet>
+		<servlet-name>springYoloWowLotMarket</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/05_market/market-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotMarket</servlet-name>
+		<url-pattern>*.market</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for share -->
+	<servlet>
+		<servlet-name>springYoloWowLotShare</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/06_share/share-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotShare</servlet-name>
+		<url-pattern>*.share</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for myinfo -->
+	<servlet>
+		<servlet-name>springYoloWowLotMyinfo</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/07_myinfo/myinfo-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotMyinfo</servlet-name>
+		<url-pattern>*.myinfo</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for myreg -->
+	<servlet>
+		<servlet-name>springYoloWowLotMyreg</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/08_myreg/myreg-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotMyreg</servlet-name>
+		<url-pattern>*.myreg</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for host -->
+	<servlet>
+		<servlet-name>springYoloWowLotHost</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/09_host/host-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotHost</servlet-name>
+		<url-pattern>*.host</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for host -->
+	<servlet>
+		<servlet-name>springYoloWowLotMessage</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/10_message/message-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotMessage</servlet-name>
+		<url-pattern>*.message</url-pattern>
+	</servlet-mapping>
+	
+	<!-- The front controller for footer menu -->
+	<servlet>
+		<servlet-name>springYoloWowLotFootermenu</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			/WEB-INF/springConfig/11_footermenu/footermenu-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springYoloWowLotFootermenu</servlet-name>
+		<url-pattern>*.footermenu</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 한글 인코딩 -->
+  <filter>
+  	<filter-name>characterEncoding</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>characterEncoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+</web-app>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myclub">
+
+<!-- myclublist 출력 -->
+<select id="myclubList" parameterType="string" resultType="yolo.club.dto.ClubListVO">
+	SELECT C.C_NUM C_NUM, I.CIMG_NAME CIMG_NAME, C.C_TYPE C_TYPE, C.C_TITLE C_TITLE, C.c_people c_people, C.C_PERIOD C_PERIOD, C.C_DATE C_DATE, C.C_PLACE C_PLACE
+	FROM CLUB C JOIN CLUBIMAGE I
+	ON c.c_num = i.c_num
+	WHERE c.u_id = #{uid}
+</select>
+
+<!-- cdetail view 출력 -->
+<select id="cdetail" parameterType="yolo.club.dto.ClubListVO" resultType="yolo.club.dto.ClubListVO">
+	SELECT C.C_NUM C_NUM, C.U_ID U_ID, I.CIMG_NAME CIMG_NAME, C.C_TYPE C_TYPE, C.C_TITLE C_TITLE, C.C_TAG C_TAG, C.C_PEOPLE C_PEOPLE, C.C_RECRUIT C_RECRUIT, C.C_PERIOD C_PERIOD, C.C_DATE C_DATE, C.C_PLACE C_PLACE, 
+    C.C_CONTENT C_CONTENT, C.C_REGDATE C_REGDATE	
+    FROM CLUB C JOIN CLUBIMAGE I
+	ON c.c_num = i.c_num
+	WHERE C.C_NUM = #{c_num} AND C.U_ID = #{u_id}
+</select>
+
+<!-- myclubDelete -->
+<delete id="myclubDelete" parameterType="yolo.club.dto.ClubListVO">
+	DELETE FROM club WHERE C_NUM=#{c_num}
+</delete>
+
+</mapper>

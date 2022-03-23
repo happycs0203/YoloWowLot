@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="appliedclub">
+
+<!-- appliedClub input sql -->
+<insert id="appclubinput" parameterType="yolo.mypage.appliedclub.dto.appliedclubVO">
+	INSERT INTO SIGNCLUB
+	VALUES( concat('sc_', SIGNCLUB_NO_SEQ.nextval), #{c_num}, #{u_id}, sysdate)
+</insert>
+<!-- Club Entry Number + sql -->
+<update id="clubentryUp" parameterType="yolo.mypage.appliedclub.dto.appliedclubVO">
+	UPDATE CLUB SET C_ENTRY = C_ENTRY +'1' WHERE c_num = #{c_num}
+</update>
+
+
+<!-- Club Entry Number - sql -->
+<update id="clubentryDown" parameterType="yolo.mypage.appliedclub.dto.SignclubVO">
+	<selectKey keyColumn="c_num" keyProperty="c_num" order="BEFORE" resultType='string'>
+   		SELECT C_NUM FROM SIGNCLUB WHERE U_ID = #{u_id} AND SC_NUM = #{sc_num}
+	</selectKey>
+	UPDATE CLUB SET C_ENTRY = C_ENTRY -'1' WHERE c_num = #{c_num}
+</update>
+<!-- appliedClub cancel sql -->
+<delete id="appclubdelete" parameterType="yolo.mypage.appliedclub.dto.SignclubVO">
+	DELETE FROM SIGNCLUB WHERE U_ID = #{u_id} AND SC_NUM = #{sc_num}
+</delete>
+
+
+<!-- appliedClub List 출력 sql -->
+<select id="appclublist" parameterType="hashmap" resultType="yolo.mypage.appliedclub.dto.SignclubVO">
+	SELECT S.SC_NUM SC_NUM, S.C_NUM C_NUM, C.U_ID U_ID, C.C_TITLE C_TITLE, C.C_PERIOD C_PERIOD, 
+	C.C_DATE C_DATE, C.C_PLACE C_PLACE, I.CIMG_NAME CIMG_NAME
+	FROM SIGNCLUB S, CLUB C, CLUBIMAGE I
+	WHERE S.C_NUM = C.C_NUM and C.C_NUM = I.C_NUM and S.U_ID = #{user}
+</select>
+
+
+
+
+
+
+</mapper>
